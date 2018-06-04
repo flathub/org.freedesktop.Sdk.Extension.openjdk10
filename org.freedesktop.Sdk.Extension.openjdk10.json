@@ -5,58 +5,73 @@
     "runtime-version": "1.6",
     "build-extension": true,
     "sdk": "org.freedesktop.Sdk",
-    "sdk-extensions": [ "org.freedesktop.Sdk.Extension.openjdk9" ],
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.openjdk10"
+    ],
     "separate-locales": false,
     "appstream-compose": false,
-    "cleanup": [ "/share/info", "/share/man" ],
-    "build-options" : {
+    "cleanup": [
+        "/share/info",
+        "/share/man"
+    ],
+    "build-options": {
         "no-debuginfo": true,
         "strip": true,
-        "cflags": "-O2 -g",
-        "cxxflags": "-O2 -g",
         "prefix": "/usr/lib/sdk/openjdk10",
         "env": {
+            "V": "1"
         }
     },
     "modules": [
         {
             "name": "bootstrap",
-            "cleanup": [ "*" ],
+            "cleanup": [
+                "*"
+            ],
             "buildsystem": "simple",
             "sources": [
                 {
                     "type": "file",
-                    "only-arches": ["i386"],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/java-openjdk-10.0.1.10-3.fc28.i686.tar.gz",
-                    "dest-filename": "java-openjdk.tar.gz",
-                    "sha512": "cd8f477cef231dfdb292bef4b68c7d9dfa87b6a5c8f3fcdc8fa989ddbd8d6186b786759b4190ce12a4acafca4b8679abed59f03b7409e52a4805cebe7b15c9c3"
+                    "only-arches": [
+                        "i386"
+                    ],
+                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.i686.tar.bz2",
+                    "dest-filename": "java-openjdk.tar.bz2",
+                    "sha512": "602e8642f38ea087568ac994597112ccaec7228d6ebd554b01933ff81fc448dea6a5406af14db0915a7466c23a27cbdde6df05e669f1976cc10dd98761fe7f1e"
                 },
                 {
                     "type": "file",
-                    "only-arches": ["x86_64"],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/java-openjdk-10.0.1.10-3.fc28.x86_64.tar.gz",
-                    "dest-filename": "java-openjdk.tar.gz",
-                    "sha512": "3a342fff57fafea63667491f99a3358f74600d8bbdd4b6a73258449890937978fce3a86750b8299e9f4e31f404a6c5480f6db6f645e371f90ba34a3c9a22a8a8"
+                    "only-arches": [
+                        "x86_64"
+                    ],
+                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.x86_64.tar.bz2",
+                    "dest-filename": "java-openjdk.tar.bz2",
+                    "sha512": "5e05350b6b796b3462ef33cc980e2ff32036c8143ccebf0685399028dcc38fc9f3758f61c2e94ef9dc41de2e3afb723faf69830e047f9ff097b764cb0168760f"
                 },
                 {
                     "type": "file",
-                    "only-arches": ["arm"],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/java-openjdk-10.0.1.10-3.fc28.armv7hl.tar.gz",
-                    "dest-filename": "java-openjdk.tar.gz",
-                    "sha512": "67cbf9f4901bea70e21bb9813644e8618a6d9078131429c77e0ac8b3fc72bb36be5a09fb4fa417944a906f0dd288d5f59e02b8d52aa9773e78cc04eef7c3e158"
+                    "only-arches": [
+                        "arm"
+                    ],
+                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.armv7hl.tar.bz2",
+                    "dest-filename": "java-openjdk.tar.bz2",
+                    "sha512": "e7cdf02bfde14fce36f9c23311bba4d12c1923108c0690e2d4b2f4c1c5eeca44c2afd22117946b7a9bbee4de3a49252af9762314bfb444330cd504e68e66c631"
                 },
                 {
                     "type": "file",
-                    "only-arches": ["aarch64"],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/java-openjdk-10.0.1.10-3.fc28.aarch64.tar.gz",
-                    "dest-filename": "java-openjdk.tar.gz",
-                    "sha512": "5b22c39ca63746d297a1fc61fe087d885680b066a1f1fdc18e80b7d1321c88af33d6e9ae443c5802479797a4ee6537615b5a4254f2d825f788cf04a623ae8fbe"
+                    "only-arches": [
+                        "aarch64"
+                    ],
+                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.aarch64.tar.bz2",
+                    "dest-filename": "java-openjdk.tar.bz2",
+                    "sha512": "bc9901f3dd4e215be926dbe122f3e948f6728b2c6b6c0e22d23c8bea9e2bae189b7e7213f9166a10227e168917ee77d7c244e9b9d65ea63a90a641f89f68249a"
                 }
             ],
             "build-commands": [
-                "tar xf java-openjdk.tar.gz",
+                "tar xf java-openjdk.tar.bz2",
                 "mkdir -p $FLATPAK_DEST/bootstrap-java",
-                "cp -dr usr/lib/jvm/java-*/* $FLATPAK_DEST/bootstrap-java"
+                "cp -dr usr/lib/jvm/java-*/* $FLATPAK_DEST/bootstrap-java",
+                "ln -sf /proc/self/fd /dev/"
             ]
         },
         {
@@ -65,6 +80,7 @@
             "no-parallel-make": true,
             "config-opts": [
                 "--with-boot-jdk=/usr/lib/sdk/openjdk10/bootstrap-java",
+                "--with-jvm-variants=server",
                 "--with-version-build=10",
                 "--with-version-pre=",
                 "--with-version-opt=",
@@ -77,9 +93,9 @@
                 "--with-libpng=system",
                 "--with-lcms=system",
                 "--with-stdc++lib=dynamic",
-                "--with-extra-cxxflags=-Wno-error -std=gnu++98 -fno-delete-null-pointer-checks -fno-lifetime-dse",
-                "--with-extra-cflags=-fstack-protector-strong -Wno-error -std=gnu++98  -fno-delete-null-pointer-checks -fno-lifetime-dse -fpermissive",
-                "--with-extra-ldflags=-Wl,-z,relro  -Wl,-z,now",
+                "--with-extra-cxxflags=-O2 -g -Wno-error -std=gnu++98 -fno-delete-null-pointer-checks -fno-lifetime-dse",
+                "--with-extra-cflags=-O2 -g -fstack-protector-strong -Wno-error -fno-delete-null-pointer-checks -fno-lifetime-dse -fpermissive",
+                "--with-extra-ldflags=-Wl,-z,relro -Wl,-z,now",
                 "--disable-javac-server",
                 "--disable-warnings-as-errors"
             ],
@@ -88,7 +104,7 @@
                 "LOG=trace",
                 "WARNINGS_ARE_ERRORS=-Wno-error",
                 "CFLAGS_WARNINGS_ARE_ERRORS=-Wno-error",
-                "all"
+                "images"
             ],
             "sources": [
                 {
@@ -101,7 +117,7 @@
                     "commands": [
                         "chmod a+x configure"
                     ]
-		}
+                }
             ]
         },
         {
@@ -114,7 +130,7 @@
                         "cd /usr/lib/sdk/openjdk10/jvm/openjdk-10.0.1",
                         "cp -ra conf lib /app/jre/",
                         "rm /app/jre/lib/src.zip /app/jre/lib/ct.sym",
-			"cp -ra bin/{java,jjs,keytool,orbd,pack200,rmid,rmiregistry,servertool,tnameserv,unpack200} /app/jre/bin"
+                        "cp -ra bin/{java,jjs,keytool,orbd,pack200,rmid,rmiregistry,servertool,tnameserv,unpack200} /app/jre/bin"
                     ],
                     "dest-filename": "install.sh"
                 },
