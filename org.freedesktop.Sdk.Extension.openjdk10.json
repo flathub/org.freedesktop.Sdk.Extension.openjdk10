@@ -70,8 +70,7 @@
             "build-commands": [
                 "tar xf java-openjdk.tar.bz2",
                 "mkdir -p $FLATPAK_DEST/bootstrap-java",
-                "cp -dr usr/lib/jvm/java-*/* $FLATPAK_DEST/bootstrap-java",
-                "ln -sf /proc/self/fd /dev/"
+                "cp -dr usr/lib/jvm/java-*/* $FLATPAK_DEST/bootstrap-java"
             ]
         },
         {
@@ -127,7 +126,7 @@
                     "type": "script",
                     "commands": [
                         "mkdir -p /app/jre/bin",
-                        "cd /usr/lib/sdk/openjdk10/jvm/openjdk-10.0.1",
+                        "cd /usr/lib/sdk/openjdk10/jvm/openjdk-10",
                         "cp -ra conf lib /app/jre/",
                         "rm /app/jre/lib/src.zip /app/jre/lib/ct.sym",
                         "cp -ra bin/{java,jjs,keytool,orbd,pack200,rmid,rmiregistry,servertool,tnameserv,unpack200} /app/jre/bin"
@@ -138,7 +137,7 @@
                     "type": "script",
                     "commands": [
                         "mkdir -p /app/jdk/",
-                        "cd /usr/lib/sdk/openjdk10/jvm/openjdk-10.0.1",
+                        "cd /usr/lib/sdk/openjdk10/jvm/openjdk-10",
                         "cp -ra bin conf include jmods lib /app/jdk/"
                     ],
                     "dest-filename": "installjdk.sh"
@@ -153,6 +152,7 @@
             ],
             "buildsystem": "simple",
             "build-commands": [
+                "(cd /usr/lib/sdk/openjdk10/jvm && ln -s openjdk-10.0.1 openjdk-10)",
                 "cp enable.sh install.sh installjdk.sh /usr/lib/sdk/openjdk10/"
             ]
         },
