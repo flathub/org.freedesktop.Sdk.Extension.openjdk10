@@ -30,7 +30,7 @@
             "config-opts": [
                 "--with-boot-jdk=/usr/lib/sdk/openjdk9/jvm/openjdk-9",
                 "--with-jvm-variants=server",
-                "--with-version-build=10",
+                "--with-version-build=13",
                 "--with-version-pre=",
                 "--with-version-opt=",
                 "--with-debug-level=release",
@@ -58,8 +58,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://src.fedoraproject.org/repo/pkgs/java-openjdk/jdk-updates-jdk10u-jdk-10.0.1+10.tar.xz/sha512/e57810a4208bb12a6b37f5e8313e30c489e6611ec6be8e7a8fb3c0ae9f1842803a3775bc7cc1f597064444fb4fabae5798a4447712fbf547f7021dd0da384613/jdk-updates-jdk10u-jdk-10.0.1+10.tar.xz",
-                    "sha512": "e57810a4208bb12a6b37f5e8313e30c489e6611ec6be8e7a8fb3c0ae9f1842803a3775bc7cc1f597064444fb4fabae5798a4447712fbf547f7021dd0da384613"
+                    "url": "https://src.fedoraproject.org/repo/pkgs/java-openjdk/jdk-updates-jdk10u-jdk-10.0.2+13.tar.xz/sha512/e5de419cec42e376ce341126c64370211cb09f326cdfafc64cec52640d2a2780f3ee705d51b6d025af6ca74c1525ed8d4a9d9afbe5b45f9709dd4d2242f1af08/jdk-updates-jdk10u-jdk-10.0.2+13.tar.xz",
+                    "sha512": "e5de419cec42e376ce341126c64370211cb09f326cdfafc64cec52640d2a2780f3ee705d51b6d025af6ca74c1525ed8d4a9d9afbe5b45f9709dd4d2242f1af08"
                 },
                 {
                     "type": "shell",
@@ -102,7 +102,7 @@
             ],
             "buildsystem": "simple",
             "build-commands": [
-                "(cd /usr/lib/sdk/openjdk10/jvm && ln -s openjdk-10.0.1 openjdk-10)",
+                "(cd /usr/lib/sdk/openjdk10/jvm && ln -s openjdk-10.0.2 openjdk-10)",
                 "cp enable.sh install.sh installjdk.sh /usr/lib/sdk/openjdk10/"
             ]
         },
