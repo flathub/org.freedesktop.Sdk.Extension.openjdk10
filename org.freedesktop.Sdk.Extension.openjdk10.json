@@ -6,7 +6,7 @@
     "build-extension": true,
     "sdk": "org.freedesktop.Sdk",
     "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.openjdk10"
+        "org.freedesktop.Sdk.Extension.openjdk9"
     ],
     "separate-locales": false,
     "appstream-compose": false,
@@ -24,61 +24,11 @@
     },
     "modules": [
         {
-            "name": "bootstrap",
-            "cleanup": [
-                "*"
-            ],
-            "buildsystem": "simple",
-            "sources": [
-                {
-                    "type": "file",
-                    "only-arches": [
-                        "i386"
-                    ],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.i686.tar.bz2",
-                    "dest-filename": "java-openjdk.tar.bz2",
-                    "sha512": "602e8642f38ea087568ac994597112ccaec7228d6ebd554b01933ff81fc448dea6a5406af14db0915a7466c23a27cbdde6df05e669f1976cc10dd98761fe7f1e"
-                },
-                {
-                    "type": "file",
-                    "only-arches": [
-                        "x86_64"
-                    ],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.x86_64.tar.bz2",
-                    "dest-filename": "java-openjdk.tar.bz2",
-                    "sha512": "5e05350b6b796b3462ef33cc980e2ff32036c8143ccebf0685399028dcc38fc9f3758f61c2e94ef9dc41de2e3afb723faf69830e047f9ff097b764cb0168760f"
-                },
-                {
-                    "type": "file",
-                    "only-arches": [
-                        "arm"
-                    ],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.armv7hl.tar.bz2",
-                    "dest-filename": "java-openjdk.tar.bz2",
-                    "sha512": "e7cdf02bfde14fce36f9c23311bba4d12c1923108c0690e2d4b2f4c1c5eeca44c2afd22117946b7a9bbee4de3a49252af9762314bfb444330cd504e68e66c631"
-                },
-                {
-                    "type": "file",
-                    "only-arches": [
-                        "aarch64"
-                    ],
-                    "url": "https://fedorapeople.org/~mbooth/bootstrap_jdk/bootstrap-openjdk-10.0.1.10-3.fc28.aarch64.tar.bz2",
-                    "dest-filename": "java-openjdk.tar.bz2",
-                    "sha512": "bc9901f3dd4e215be926dbe122f3e948f6728b2c6b6c0e22d23c8bea9e2bae189b7e7213f9166a10227e168917ee77d7c244e9b9d65ea63a90a641f89f68249a"
-                }
-            ],
-            "build-commands": [
-                "tar xf java-openjdk.tar.bz2",
-                "mkdir -p $FLATPAK_DEST/bootstrap-java",
-                "cp -dr usr/lib/jvm/java-*/* $FLATPAK_DEST/bootstrap-java"
-            ]
-        },
-        {
             "name": "java",
             "buildsystem": "autotools",
             "no-parallel-make": true,
             "config-opts": [
-                "--with-boot-jdk=/usr/lib/sdk/openjdk10/bootstrap-java",
+                "--with-boot-jdk=/usr/lib/sdk/openjdk9/jvm/openjdk-9",
                 "--with-jvm-variants=server",
                 "--with-version-build=10",
                 "--with-version-pre=",
@@ -138,7 +88,7 @@
                     "commands": [
                         "mkdir -p /app/jdk/",
                         "cd /usr/lib/sdk/openjdk10/jvm/openjdk-10",
-                        "cp -ra bin conf include jmods lib /app/jdk/"
+                        "cp -ra bin conf include lib /app/jdk/"
                     ],
                     "dest-filename": "installjdk.sh"
                 },
